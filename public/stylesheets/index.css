@@ -6,5 +6,15 @@
 }
 
 #search .el-input {
-  margin: 20px auto;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-height: 300px) {
+    #content{
+     padding-top: 10px;
+     position: static;
+     top:none;
+     left: none;
+     transform: none;
+    }
 }

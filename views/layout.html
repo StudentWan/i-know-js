@@ -7,27 +7,73 @@
         <title>{{ title }}</title>
         <!-- 引入样式 -->
         <link rel="stylesheet" href="/stylesheets/style.css">
-        <link rel="stylesheet" href="/stylesheets/index.css">
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">    
+
+        {% block extraheader %} 
+        {% endblock %}
     </head>
     <body>
-    <div id="nav">
+    <div id="main">
+        <div id="nav">
         <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1">处理中心</el-menu-item>
             <el-submenu index="2">
-                <template slot="title">我的工111作台</template>
-                <el-menu-item index="2-1">选恩1啊s1</el-menu-item>
-                <el-menu-item index="2-2">选项a122212</el-menu-item>
-                <el-menu-item index="2-3">选项333</el-menu-item>
+                <template slot="title">我的工作台</template>
+                <el-menu-item index="2-1">选项</el-menu-item>
+                <el-menu-item index="2-2">选项</el-menu-item>
+                <el-menu-item index="2-3">选项</el-menu-item>
             </el-submenu>
             <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
         </el-menu>
-    </div>
-    
+        </div>
+        
+        <div id="content">
         {% block content %}
 
         {% endblock %}
+        </div>
+        <div id="footer">
+            <el-menu theme="dark" class="el-menu-demo" mode="horizontal">
+                <p>CopyRight@JingZhe {$ nowYear $}</p>
+            </el-menu>
+        </div>
+        </div>
     </body>
     <script src="/javascripts/vue.js"></script>
     <!-- 引入组件库 -->
-    <script src="/javascripts/index.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        let Nav = {
+            delimiters: ['{$', '$}'],
+            data() {
+                return {
+                    activeIndex: '1',
+                };
+            },
+            methods: {
+                handleSelect(key, keyPath) {
+                        console.log(key, keyPath);
+                    }
+            }
+        }
+        let vueNav = Vue.extend(Nav)
+        new vueNav().$mount('#nav')
+
+        let Footer = {
+            delimiters: ['{$', '$}'],
+            data() {
+                return {
+                    nowYear: '2017'
+                }
+            },
+            methods: {
+               
+            }
+        }
+        let vueFooter = Vue.extend(Footer)
+        new vueFooter().$mount('#footer')
+    </script>
+
+    {% block extrascript %}
+    {% endblock %}
 </html>

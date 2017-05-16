@@ -1,8 +1,44 @@
+html {
+  height: 100%;
+}
+
 body {
-  padding: 50px;
+  height: 100%;
+  margin: 0 5px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+body * {
+  box-sizing: border-box;
+}
+
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+#main {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /*IE6不识别min-height*/
+  position: relative;
+}
+
+#nav {
+
+}
+
+#content {
+  padding-bottom: 45px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #bfcbd9;
+}
+
+#footer ul {
+  padding: 0 20px;
 }

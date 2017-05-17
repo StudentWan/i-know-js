@@ -1,55 +1,56 @@
-{% extends '../views/layout.html' %}
-
-{% block extraheader %}
-    <link rel="stylesheet" href="/stylesheets/index.css">
-{% endblock %}
-
-{% block content %}
-    <div id="search">
-        <el-input placeholder="Please type domain, e.g, baidu.com">
-            <template slot="prepend">http://</template>
-            <el-button slot="append" icon="search"></el-button>
-        </el-input>
-    </div>
-     <template>
-            <el-select v-model="values" multiple placeholder="请选择">
-                <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-                </el-option>
-            </el-select>
-        </template>
-{% endblock %}
-
-{% block extrascript %}
-    <script>
-    var Content = {
-      delimiters: ['{$', '$}'],
-      data() {
-        return {
-          options: [{
-            value: '1',
-            label: 'jQuery'
-          }, {
-            value: '2',
-            label: 'Vue'
-          }, {
-            value: '3',
-            label: 'React'
-          }, {
-            value: '4',
-            label: 'Angular'
-          }, {
-            value: '5',
-            label: 'Echarts'
-          }],
-          values: []
-        }
+{% extends '../views/layout.html' %} {% block extraheader %}
+<link rel="stylesheet" href="/stylesheets/index.css"> {% endblock %} {% block content %}
+<div id="search">
+  <el-input placeholder="Please type a domain, e.g, baidu.com">
+    <template slot="prepend">http://</template>
+    <el-button v-on:click="searchWeb" slot="append" icon="search"></el-button>
+  </el-input>
+</div>
+<template>
+  <el-select v-model="values" multiple placeholder="请选择">
+    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+{% endblock %} {% block extrascript %}
+<script>
+  var Content = {
+    delimiters: ['{$', '$}'],
+    data() {
+      return {
+        options: [{
+          value: 'jQuery',
+          label: 'jQuery'
+        }, {
+          value: 'Vue',
+          label: 'Vue'
+        }, {
+          value: 'React',
+          label: 'React'
+        }, {
+          value: 'Angular',
+          label: 'Angular'
+        }, {
+          value: 'Echarts',
+          label: 'Echarts'
+        }],
+        values: []
       }
+    },
+    methods: {
+      searchWeb: function() {
+        $.ajax({
+          url: '/search',
+          data: {values: this.values, url: $('.el-input__inner').val()},
+          method: 'POST',
+          success: (data) => {
+            console.log(data);
+          }
+        })
+      }
+    }
   }
-    let vueContent = Vue.extend(Content)
-    new vueContent().$mount('#content')
-    </script>
+  let vueContent = Vue.extend(Content)
+  new vueContent().$mount('#content')
+</script>
 {% endblock %}

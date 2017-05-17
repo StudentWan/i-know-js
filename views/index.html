@@ -7,10 +7,27 @@
   </el-input>
 </div>
 <template>
-  <el-select v-model="values" multiple placeholder="请选择">
+  <el-select v-model="values" multiple placeholder="Please choose">
     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
     </el-option>
   </el-select>
+</template>
+<template>
+  <p v-for="item in searchedValues">
+    <el-alert v-if="item.isTrue===true"
+    :title="item.name"
+    type="success"
+    description="Found this JS library!:)"
+    show-icon>
+    </el-alert>
+    <el-alert v-else
+    :title="item.name"
+    type="error"
+    description="Didn't find this JS library.:("
+    show-icon>
+  </el-alert>
+  </p>
+  
 </template>
 {% endblock %} {% block extrascript %}
 <script>
@@ -34,17 +51,29 @@
           value: 'Echarts',
           label: 'Echarts'
         }],
-        values: []
+        values: [],
+        searchedValues: {}
       }
     },
     methods: {
-      searchWeb: function() {
+      searchWeb: function () {
         $.ajax({
           url: '/search',
-          data: {values: this.values, url: $('.el-input__inner').val()},
+          data: {
+            values: this.values,
+            url: $('.el-input__inner').val()
+          },
           method: 'POST',
           success: (data) => {
-            console.log(data);
+            if (data.errno) {
+              this.$notify.error({
+                title: 'Wrong!',
+                message: data.errno
+              });
+            } else {
+              this.searchedValues = data;
+              console.log(this.searchedValues);
+            }
           }
         })
       }

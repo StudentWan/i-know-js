@@ -51,13 +51,30 @@
                 };
             },
             methods: {
-                handleSelect(key, keyPath) {
-                        console.log(key, keyPath);
+                handleSelect(key) {
+                        switch (key) {
+                            case '1':
+                                console.log(111);
+                                window.location.href = "/";
+                                break;
+                            case '2-1':
+                                window.location.href = "/top";
+                                break;
+                            case '2-2':
+                                break;
+                            case '2-3':
+                                break;
+                            case '3':
+                                window.open('http://danielwan.me/contact.html');
+                                break;
+                            default:
+                                break;
+                        }
                     }
             }
         }
         let vueNav = Vue.extend(Nav)
-        new vueNav().$mount('#nav')
+        let vueNavInstance = new vueNav().$mount('#nav')
 
         let Footer = {
             delimiters: ['{$', '$}'],

@@ -1,0 +1,26 @@
+{% extends "../views/layout.html" %} {% block extraheader %}
+<link rel="stylesheet" href="/stylesheets/top.css"> {% endblock %}{% block content %}
+<div id="query" @keyup.enter="searchTopX">
+<el-input v-model="input" placeholder="How many sites you want to query?"></el-input>
+</div>
+{% endblock %} {% block extrascript %}
+<script>
+  vueNavInstance.$data.activeIndex = '2-1';
+
+  var Content = {
+    delimiters: ['{$', '$}'],
+    data() {
+      return {
+        input: ''
+      }
+    },
+    methods: {
+      searchTopX: function() {
+        console.log(1111);
+      }
+    }
+  }
+  let vueContent = Vue.extend(Content)
+  new vueContent().$mount('#content')
+</script>
+{% endblock %}

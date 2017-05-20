@@ -1,10 +1,17 @@
 {% extends '../views/layout.html' %} {% block extraheader %}
 <link rel="stylesheet" href="/stylesheets/index.css"> {% endblock %} {% block content %}
 <div id="search">
-  <el-input placeholder="Please type a domain, e.g, baidu.com">
+  <!--<el-input placeholder="Please type a domain, e.g, baidu.com">
     <template slot="prepend">http://</template>
     <el-button v-on:click="searchWeb" slot="append" icon="search"></el-button>
-  </el-input>
+  </el-input>-->
+  <div class="el-input el-input-group el-input-group--append el-input-group--prepend">
+    <div class="el-input-group__prepend">http://</div>
+    <!----><input autocomplete="off" @keyup.enter="searchWeb" placeholder="Please type a domain, e.g, baidu.com" type="text" rows="2" validateevent="true"
+      class="el-input__inner">
+    <!---->
+    <div class="el-input-group__append"><button type="button" @click="searchWeb" class="el-button el-button--default"><!----><i class="el-icon-search"></i><!----></button></div>
+  </div>
 </div>
 <template>
   <el-select v-model="values" multiple placeholder="Please choose">
@@ -14,20 +21,12 @@
 </template>
 <template>
   <p v-for="item in searchedValues">
-    <el-alert v-if="item.isTrue===true"
-    :title="item.name"
-    type="success"
-    description="Found this JS library!:)"
-    show-icon>
+    <el-alert v-if="item.isTrue===true" :title="item.name" type="success" description="Found this JS library!:)" show-icon>
     </el-alert>
-    <el-alert v-else
-    :title="item.name"
-    type="error"
-    description="Didn't find this JS library.:("
-    show-icon>
-  </el-alert>
+    <el-alert v-else :title="item.name" type="error" description="Didn't find this JS library.:(" show-icon>
+    </el-alert>
   </p>
-  
+
 </template>
 {% endblock %} {% block extrascript %}
 <script>
@@ -50,6 +49,9 @@
         }, {
           value: 'Echarts',
           label: 'Echarts'
+        }, {
+          value: 'Bootstrap',
+          label: 'Bootstrap'
         }],
         values: [],
         searchedValues: {}

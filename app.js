@@ -7,6 +7,7 @@ const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger');
 
 const index = require('./routes/index');
+const options = require('./routes/options');
 //log工具
 const logUtil = require('./utils/log_util');
 
@@ -56,5 +57,6 @@ app.use(async(ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods());
+app.use(options.routes(), options.allowedMethods());
 
 module.exports = app;

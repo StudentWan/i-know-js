@@ -22,12 +22,7 @@
         <div id="nav">
             <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item id="home" index="1">Home</el-menu-item>
-                <el-submenu index="2">
-                    <template slot="title">Options</template>
-                    <el-menu-item index="2-1">Top</el-menu-item>
-                    <el-menu-item index="2-2">Per month</el-menu-item>
-                    <el-menu-item index="2-3">Per season</el-menu-item>
-                </el-submenu>
+                <el-menu-item id="top" index="2">Top</el-menu-item>
                 <el-menu-item index="3">About</el-menu-item>
             </el-menu>
         </div>
@@ -57,15 +52,10 @@
             handleSelect(key) {
                 switch (key) {
                     case '1':
-                        console.log(111);
                         window.location.href = "/";
                         break;
-                    case '2-1':
+                    case '2':
                         window.location.href = "/top";
-                        break;
-                    case '2-2':
-                        break;
-                    case '2-3':
                         break;
                     case '3':
                         window.open('http://danielwan.me/contact.html');

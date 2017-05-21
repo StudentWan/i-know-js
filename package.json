@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -e js,css,html bin/www",
+    "start": "NODE_ENV=development nodemon -e js,css,html bin/www",
     "prd": "NODE_ENV=production pm2 start bin/www",
     "test": "NODE_ENV=test echo \"Error: no test specified\" && exit 1"
   },

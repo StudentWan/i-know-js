@@ -1,7 +1,23 @@
 {% extends "../views/layout.html" %} {% block extraheader %}
 <link rel="stylesheet" href="/stylesheets/top.css"> {% endblock %}{% block content %}
 <div id="query" @keyup.enter="searchTopX">
-<el-input v-model="input" placeholder="How many sites you want to query?"></el-input>
+  <el-input v-model="input" placeholder="How many sites you want to query?"></el-input>
+</div>
+<div class="container">
+  <table border="1">
+    <tr>
+      <th class="col1">名字</th>
+      <th class="col2">URL</th>
+      <th class="col3">JS库</th>
+    </tr>
+    <tr v-for="item in topData">
+      <td class="col1">{$ item.name $}</td>
+      <td class="col2">{$ item.url $}</td>
+      <td class="col3">
+        <p v-for="source in item.src">{$ source $}</p>
+      </td>
+    </tr>
+  </table>
 </div>
 {% endblock %} {% block extrascript %}
 <script>
@@ -11,12 +27,44 @@
     delimiters: ['{$', '$}'],
     data() {
       return {
-        input: ''
+        input: '',
+        topData: []
       }
     },
     methods: {
-      searchTopX: function() {
-        console.log(1111);
+      searchTopX: function () {
+        let siteCounts = this.input;
+
+        $.ajax({
+          url: '/top/geturls',
+          data: {
+            count: siteCounts
+          },
+          method: 'POST',
+          success: (data) => {
+            if (data.errno) {
+              this.$notify.error({
+                title: 'Wrong!',
+                message: data.errno
+              })
+            } else {
+              this.topData = data;
+              for (let item of this.topData) {
+                $.ajax({
+                  url: '/top/searchlibs',
+                  data: {
+                    url: item.url
+                  },
+                  method: 'POST',
+                  success: (data) => {
+                    Vue.set(item, 'src', data);
+                  }
+                })
+              }
+              console.log(this.topData);
+            }
+          }
+        })
       }
     }
   }

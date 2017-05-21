@@ -2,3 +2,44 @@
   width: 100%;
   margin: 10px auto;
 }
+
+
+.el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+
+  #content{
+    padding-bottom: 55px;
+  }
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid gray;
+}
+
+table th {
+  background: silver;
+  text-align: center !important;
+}
+
+.col1 {
+  width: 25%;
+}
+
+.col2 {
+  width: 25%;
+}
+
+.col3 {
+  text-align: left;
+  word-break: break-all;
+  /*应用到所有*/
+  padding: 5px; 
+}
+

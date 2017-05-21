@@ -1,96 +1,99 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{{ title }}</title>
-        <!-- 引入样式 -->
-        <link rel="stylesheet" href="/stylesheets/style.css">
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">    
-        <script src="/javascripts/jquery-3.2.1.js" ></script>
-        {% block extraheader %} 
-        {% endblock %}
-    </head>
-    <body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <script src="/javascripts/jquery-3.2.1.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"> 
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+        {% block extraheader %} {% endblock %}
+</head>
+
+<body>
     <div id="main">
         <div id="nav">
-        <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item id="home" index="1">Home</el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">Options</template>
-                <el-menu-item index="2-1">Top 10</el-menu-item>
-                <el-menu-item index="2-2">Per month</el-menu-item>
-                <el-menu-item index="2-3">Per season</el-menu-item>
-            </el-submenu>
-            <el-menu-item index="3">About</el-menu-item>
-        </el-menu>
+            <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item id="home" index="1">Home</el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title">Options</template>
+                    <el-menu-item index="2-1">Top</el-menu-item>
+                    <el-menu-item index="2-2">Per month</el-menu-item>
+                    <el-menu-item index="2-3">Per season</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="3">About</el-menu-item>
+            </el-menu>
         </div>
-        
-        <div id="content">
-        {% block content %}
 
-        {% endblock %}
+        <div id="content">
+            {% block content %} {% endblock %}
         </div>
         <div id="footer">
             <el-menu theme="dark" class="el-menu-demo" mode="horizontal">
                 <p>CopyRight@JingZhe {$ nowYear $}</p>
             </el-menu>
         </div>
-        </div>
-    </body>
-    <script src="/javascripts/vue.js"></script>
-    <!-- 引入组件库 -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script>
-        let Nav = {
-            delimiters: ['{$', '$}'],
-            data() {
-                return {
-                    activeIndex: '1',
-                };
-            },
-            methods: {
-                handleSelect(key) {
-                        switch (key) {
-                            case '1':
-                                console.log(111);
-                                window.location.href = "/";
-                                break;
-                            case '2-1':
-                                window.location.href = "/top";
-                                break;
-                            case '2-2':
-                                break;
-                            case '2-3':
-                                break;
-                            case '3':
-                                window.open('http://danielwan.me/contact.html');
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-            }
-        }
-        let vueNav = Vue.extend(Nav)
-        let vueNavInstance = new vueNav().$mount('#nav')
-
-        let Footer = {
-            delimiters: ['{$', '$}'],
-            data() {
-                return {
-                    nowYear: '2017'
+    </div>
+</body>
+<script src="/javascripts/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    let Nav = {
+        delimiters: ['{$', '$}'],
+        data() {
+            return {
+                activeIndex: '1',
+            };
+        },
+        methods: {
+            handleSelect(key) {
+                switch (key) {
+                    case '1':
+                        console.log(111);
+                        window.location.href = "/";
+                        break;
+                    case '2-1':
+                        window.location.href = "/top";
+                        break;
+                    case '2-2':
+                        break;
+                    case '2-3':
+                        break;
+                    case '3':
+                        window.open('http://danielwan.me/contact.html');
+                        break;
+                    default:
+                        break;
                 }
-            },
-            methods: {
-               
             }
         }
-        let vueFooter = Vue.extend(Footer)
-        new vueFooter().$mount('#footer')
-    </script>
+    }
+    let vueNav = Vue.extend(Nav)
+    let vueNavInstance = new vueNav().$mount('#nav')
 
-    {% block extrascript %}
-    {% endblock %}
+    let Footer = {
+        delimiters: ['{$', '$}'],
+        data() {
+            return {
+                nowYear: '2017'
+            }
+        },
+        methods: {
+
+        }
+    }
+    let vueFooter = Vue.extend(Footer)
+    new vueFooter().$mount('#footer')
+</script>
+
+{% block extrascript %} {% endblock %}
+
 </html>

@@ -8,7 +8,6 @@ const logger = require('koa-logger');
 
 const index = require('./routes/index');
 const top = require('./routes/top');
-//log工具
 const logUtil = require('./utils/log_util');
 
 
